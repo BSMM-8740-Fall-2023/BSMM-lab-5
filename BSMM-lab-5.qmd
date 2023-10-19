@@ -70,16 +70,24 @@ Create bootstrap samples for the training dataset. You can leave the parameters 
 
 ### Exercise 7
 
-Create workflows with `workflowsets::workflow_set` using your recipe and models. Show the workflow datastructure, noting the number of columns, and then use `tidyr::` to unnest the *info* column and show its contents.
+Create workflows with `workflowsets::workflow_set` using your recipe and models. Show the resulting datastructure, noting the number of columns, and then use `tidyr::` to unnest the *info* column and show its contents.
 
 ### Exercise 8
 
-The RMSE for the un-tuned model is \_\_.
+Use `workflowsets::workflow_map` to map the default function (`tune::tune_grid()` - look at the help for `workflowsets::workflow_map` ) across the workflows in the workflowset you just created and update the variable `all_workflows` with the result.
+
+The updated variable `all_workflows` contains a nested column named **result**, and each cell of the column **result** is a tibble containing a nested column named **.metrics**. Write code to
+
+1.  un-nest the metrics in the column .metrics
+2.  filter out the rows for the metric rsq
+3.  group by wflow_id, order the .estimate column from highest to lowest, and pick out the first row of each group.
 
 ### Exercise 9
 
-Is the tuned model better than the un-tuned model? If better, how much has the RMSE improved (in %).
+Run the code provided and compare to your results from exercise 8.
 
 ### Exercise 10
 
-Per this model, what is the most important feature for predicting fuel efficiency?
+Select the best model per the **rsq** metric using its id.
+
+What is the ratio of the OOB prediction errors (MSE): test/train?
